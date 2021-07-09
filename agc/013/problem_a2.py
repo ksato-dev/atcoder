@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
 
-from enum import Enum
-
-
-class Status(Enum):
-    UNKNOWN = 0
-    MONOTONOUS_INCREASE = 1
-    MONOTONOUS_PHENOMENON = 2
-
-
 def read_a_list():
     line = input()
     arr_str = line.split()
@@ -30,8 +21,8 @@ if __name__ == "__main__":
 
     array_count = 1
     pre_data = a_list[0]
-    pre_status = Status.UNKNOWN
-    status = Status.UNKNOWN
+    pre_status = None
+    skip_flag = False
 
     for a_id in range(1, len(a_list)):
         data = a_list[a_id]
@@ -40,27 +31,23 @@ if __name__ == "__main__":
         is_mono_phen = (data - pre_data < 0)
 
         if is_mono_inc:
-            status = Status.MONOTONOUS_INCREASE
-        if is_mono_phen:
-            status = Status.MONOTONOUS_PHENOMENON
-
-        is_consecutive = (data == pre_data)
-        if is_consecutive:
-            pre_data = data
-            pre_status = status
+            status = 1
+        elif is_mono_phen:
+            status = -1
+        else:
             continue
 
-        if pre_status == Status.UNKNOWN:
+        if pre_status is None:
             pre_status = status
 
         is_changed_status = status != pre_status
-        is_not_unknown = status and pre_status
-        if is_changed_status and is_not_unknown:
+        if is_changed_status and not skip_flag:
             array_count += 1
-            pre_status = Status.UNKNOWN
+            skip_flag = True
         else:
-            pre_status = status
+            skip_flag = False
 
+        pre_status = status
         pre_data = data
 
     print(array_count)
