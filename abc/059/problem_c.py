@@ -70,9 +70,4 @@ if __name__ == "__main__":
     count_ope2 += execute(a_list2)
 
     count_ope = min(count_ope1, count_ope2)
-
-    print(a_list1)
-    print(a_list2)
-
-    print(count_ope1)
-    print(count_ope2)
+    print(count_ope)
