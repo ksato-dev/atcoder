@@ -1,6 +1,5 @@
 if __name__ == "__main__":
     inf_val = int(1e9) + 7
-    max_n = (2 * 1e5)
     n = int(input())
     c_list = [int(v) for v in input().split()]
     c_list.sort()
@@ -13,13 +12,9 @@ if __name__ == "__main__":
             is_a_list = False
             break
         else:
-            count_a_list *= diff
-
-        if arr_id > max_n:
-            break
+            count_a_list = count_a_list * diff % inf_val
 
     if is_a_list:
         print(count_a_list)
-        print(count_a_list % inf_val)
     else:
         print(0)
