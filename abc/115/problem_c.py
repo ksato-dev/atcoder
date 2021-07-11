@@ -4,9 +4,6 @@ class data(object):
         self.y = y
         self.h = h
 
-    def __repr__(self):
-        return repr((self.x, self.y, self.h))
-
 
 if __name__ == "__main__":
     n = int(input())
@@ -14,8 +11,6 @@ if __name__ == "__main__":
     for _ in range(n):
         x, y, h = [int(v) for v in input().split()]
         data_list.append(data(x, y, h))
-
-    data_list.sort(key=lambda x: x.h, reverse=True)
 
     max_xy = 100
     for cx in range(max_xy + 1):
