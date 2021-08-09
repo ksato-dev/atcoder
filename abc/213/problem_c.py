@@ -12,6 +12,8 @@ def main():
     set_b = set(b_list)
     sorted_set_a = sorted(list(set_a))
     sorted_set_b = sorted(list(set_b))
+
+    # ID の変換テーブルを作る
     a_dict = {a: cnt+1 for cnt, a in enumerate(sorted_set_a)}
     b_dict = {b: cnt+1 for cnt, b in enumerate(sorted_set_b)}
 
