@@ -7,7 +7,7 @@ def main(n, x, y, ab_list):
     inf = 1000
 
     # dp[i][j][k] :=（状態 (i,j,k) に達するまでに、高橋君が購入する弁当の個数の最小値）
-    dp = np.full((n + 1, x + 1, y + 1), inf, dtype=np.int64) # 型を間違えるとコケる
+    dp = np.full((n + 1, x + 1, y + 1), inf, dtype=np.int64)  # 型を間違えるとコケる
 
     dp[0, 0, 0] = 0
     for i in range(n + 1):
