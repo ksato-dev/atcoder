@@ -22,4 +22,6 @@ a_sum = num_a * (2 * a + (num_a - 1) * a) // 2
 b_sum = num_b * (2 * b + (num_b - 1) * b) // 2
 gcd_sum = num_gcd * (2 * gcd + (num_gcd - 1) * gcd) // 2
 
+# a と b の倍数和から、最小公倍数の倍数和を引く。
+# その後、総和から上記を引くと解が求まる。
 print(all_sum - (a_sum + b_sum - gcd_sum))
