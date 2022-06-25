@@ -64,7 +64,6 @@ int main() {
 
   for (ul i = 0; i < m; i++) {
     std::string raw_a_list_str;
-    ul k;
     std::getline(std::cin, raw_a_list_str);
     k_list[i] = std::stoul(raw_a_list_str);
 
