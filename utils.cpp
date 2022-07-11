@@ -50,6 +50,7 @@ void GetSplitStringQue(const std::string& raw_data, std::queue<T>* v) {
 
 #define Graph(T) std::vector<std::vector<T>>
 
+//! DFS
 template <class T>
 void dfs(const Graph(T) & graph, const T& node_id, std::vector<bool>* visited) {
   if (visited->at(node_id)) return;
@@ -58,6 +59,52 @@ void dfs(const Graph(T) & graph, const T& node_id, std::vector<bool>* visited) {
   for (const T adj_node_id : graph[node_id]) {
     if (visited->at(adj_node_id)) continue;
     dfs<T>(graph, adj_node_id, visited);
+  }
+}
+
+//! 任意の頂点から木の根までの深さを調べる DFS
+template <class T>
+const T dfs(const Graph(T) & graph, const T& node_id, const T& depth,
+            std::vector<bool>* visited) {
+  T ret_depth = depth;
+  if (visited->at(node_id)) return ret_depth;
+  visited->at(node_id) = true;
+
+  for (auto adj_node_id : graph[node_id]) {
+    if (visited->at(adj_node_id)) continue;
+    // ret_depth = std::max(ret_depth, dfs<T>(graph, adj_node_id, depth + 1,
+    // visited));
+    ret_depth = dfs<T>(graph, adj_node_id, depth + 1, visited);
+  }
+  return ret_depth;
+}
+
+//! 子孫の数を調べる (ver1)
+template <class T>
+const T dfs(const Graph(T) & graph, const T& node_id,
+            std::vector<bool>* visited) {
+  if (visited->at(node_id)) return 0;
+  visited->at(node_id) = true;
+
+  T ret_children_cnt = 1;
+  for (auto adj_node_id : graph[node_id]) {
+    if (visited->at(adj_node_id)) continue;
+    ret_children_cnt += dfs<T>(graph, adj_node_id, visited);
+  }
+  return ret_children_cnt;
+}
+
+//! 子孫の数を調べる (ver2)
+template <class T>
+void dfs(const Graph(T) & graph, const T& node_id, std::vector<bool>* visited,
+         T* cnt) {
+  if (visited->at(node_id)) return;
+  visited->at(node_id) = true;
+
+  (*cnt)++;
+  for (auto adj_node_id : graph[node_id]) {
+    if (visited->at(adj_node_id)) continue;
+    dfs<T>(graph, adj_node_id, visited, cnt);
   }
 }
 
