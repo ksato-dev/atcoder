@@ -48,14 +48,17 @@ void GetSplitStringQue(const std::string& raw_data, std::queue<T>* v) {
   }
 }
 
+#define Graph(T) std::vector<std::vector<T>>
+
 template <class T>
-void dfs(const std::vector<std::vector<T>>& graph, const T& node_id,
-         std::vector<bool>* visited) {
+void dfs(const Graph(T) & graph, const T& node_id, std::vector<bool>* visited) {
   if (visited->at(node_id)) return;
   visited->at(node_id) = true;
 
-  for (const T adj_id : graph[node_id])
-    if (!visited->at(adj_id)) dfs<T>(graph, adj_id, visited);
+  for (const T adj_node_id : graph[node_id]) {
+    if (visited->at(adj_node_id)) continue;
+    dfs<T>(graph, adj_node_id, visited);
+  }
 }
 
 struct UnionFind {
