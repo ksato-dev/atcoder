@@ -6,6 +6,7 @@
 #include <sstream>
 #include <algorithm>
 
+#define Graph(T) std::vector<std::vector<T>>
 typedef unsigned long long ull;
 typedef unsigned long ul;
 
@@ -47,8 +48,6 @@ void GetSplitStringQue(const std::string& raw_data, std::queue<T>* v) {
     v->push(data);
   }
 }
-
-#define Graph(T) std::vector<std::vector<T>>
 
 //! DFS
 template <class T>
